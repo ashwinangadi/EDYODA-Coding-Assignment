@@ -1,6 +1,7 @@
 # EDYODA-Coding-Assignment
  EDYODA coding Assignment
-ScreenShots Attached
+ In terms of the outcome, I believe the code fulfils all the necessary functionality and should be able to perform the desired task.
+ ScreenShots Attached
 
 Image with Navbar
 ![WithNavbar](https://github.com/ashwinangadi/EDYODA-Coding-Assignment/assets/115735672/c6e16560-8414-45fc-bba8-9b7023206400)
