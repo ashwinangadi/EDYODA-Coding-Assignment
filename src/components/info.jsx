@@ -10,15 +10,16 @@ import { useEffect, useState } from "react"
 
 export const Info = () => {
 
-
+    
     const done = <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M19.7071 6.29289C20.0976 6.68342 20.0976 7.31658 19.7071 7.70711L10.4142 17C9.63316 17.7811 8.36683 17.781 7.58579 17L3.29289 12.7071C2.90237 12.3166 2.90237 11.6834 3.29289 11.2929C3.68342 10.9024 4.31658 10.9024 4.70711 11.2929L9 15.5858L18.2929 6.29289C18.6834 5.90237 19.3166 5.90237 19.7071 6.29289Z" fill="#ffff"/></svg>
 
     
     const [month, setMonth] = useState("12")
     const [price, setPrice] = useState("179")
-    const [dprice, setDprice] = useState("18,288.78")
+    const [discountPrice, setDiscountPrice] = useState("18,288.78")
     const [finalPrice, setFinalPrice] = useState("211.22")
 
+    //To set background of selected subcription plan
     const renderMonthSelect = (id) => {
         const green = " border-2 border-[#47d147] bg-[#D7EDDD]"
         const white = ""
@@ -29,7 +30,7 @@ export const Info = () => {
         }
       }
 
-      const renderSelect = (id) => {
+    const renderSelect = (id) => {
         const green = " border-2 border-[#47d147] bg-[#47d147]"
         const white = ""
         if (id === month) {
@@ -38,19 +39,20 @@ export const Info = () => {
           return white 
         }
       }
-
+    
+    //To Calculte the 18% GST
       const percentage = (partialValue, totalValue) => {
         return (totalValue * partialValue) /100 ;
      }
-
+    
+    //To calculate the discounted price and total price with adition of GST aswell whenever price state updates
       useEffect(()=>{
         let totalValue = percentage(18 , price) ;
         totalValue = totalValue + Number(price)
         setFinalPrice(totalValue)
         let discountPrice = 18500 - totalValue;
         const currencyFormat = new Intl.NumberFormat('en-IN').format(discountPrice); // 1,43,450
-        
-        setDprice(currencyFormat)
+        setDiscountPrice(currencyFormat)
 
       },[price])
       
@@ -112,7 +114,7 @@ export const Info = () => {
                     <div className="border-t-2 border-[#BEBEBE] my-6 ">
                         <div className="flex justify-between p-3 text-[#3C4852]"><span className="text-base font-normal">Subscription Fee</span><span className="text-base font-semibold">₹18,500</span></div>
                         <div className=" p-3 text-[#DE4313] bg-gradient-to-r from-[#DE4313]/20 to-[#FEC163]/20 " style={{borderImage: "linear-gradient(#DE4313, #FEC163) 30",borderWidth: "2px", borderStyle: "solid"}}>
-                            <span className="flex justify-between "><span>Limited time offer</span><span className="text-base font-semibold">- ₹{dprice}</span></span>
+                            <span className="flex justify-between "><span>Limited time offer</span><span className="text-base font-semibold">- ₹{discountPrice}</span></span>
                             <span className="flex "><span><img className="me-3 h-[20px] w-[20px]" src={notclock}/></span><span>Offer valid till 25th March 2023 </span></span>
                         </div>
                         <div className="flex justify-between p-3 text-[#3C4852]"><span className="text-base font-semibold">Total (Incl. of 18% GST)</span><span className="font-bold text-2xl">₹{finalPrice}</span></div>
